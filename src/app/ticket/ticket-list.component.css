@@ -1,0 +1,22 @@
+@import 'https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500;1,600';
+
+
+/* @import '../../app-assets/vendors/css/vendors.min.css'; */
+@import '../../app-assets/vendors/css/tables/datatable/dataTables.bootstrap5.min.css';
+@import '../../app-assets/vendors/css/tables/datatable/extensions/dataTables.checkboxes.css';
+@import '../../app-assets/vendors/css/tables/datatable/responsive.bootstrap5.min.css';
+
+@import '../../app-assets/css/bootstrap.css';
+@import '../../app-assets/css/bootstrap-extended.css';
+@import '../../app-assets/css/colors.css';
+@import '../../app-assets/css/components.css';
+@import '../../app-assets/css/themes/dark-layout.css';
+@import '../../app-assets/css/themes/bordered-layout.css';
+@import '../../app-assets/css/themes/semi-dark-layout.css';
+
+
+@import '../../app-assets/css/core/menu/menu-types/vertical-menu.css';
+@import '../../app-assets/css/pages/app-invoice-list.css';
+
+@import '../../assets/css/style.css';
+

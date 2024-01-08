@@ -1,0 +1,49 @@
+<!-- <div class="col-md-2">
+    <div class="list-group">
+      <a routerLink="/dashboard/ticketlist" class="list-group-item list-group-item-action">Ticket List</a>
+      <a routerLink="/dashboard/documentlist" class="list-group-item list-group-item-action">Document List</a>
+    </div>
+  </div> -->
+<div data-scroll-to-active="true" class="main-menu menu-fixed menu-dark menu-accordion menu-shadow expanded" style="touch-action: none; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
+  <div class="navbar-header expanded" style="height: 80px;">
+    <a class="navbar-brand" routerLink="/"><img src="https://admin.illiquidx.com/test/logo/logo_170x55.png" alt="logo_170x55.png" /></a>
+  </div>
+  <div class="shadow-bottom" style="display: none;"></div>
+  <div class="main-menu-content ps ps--active-y">
+    <ul id="main-menu-navigation" data-menu="menu-navigation" class="navigation navigation-main">
+      <li class="navigation-header active">
+        <span data-i18n="Modules">Modules</span>
+      </li>
+      <li class="nav-item has-sub" [class.open]="isTicketOpen" (click)="toggleTicket()">
+        <a class="d-flex align-items-center">
+          <span data-i18n="Invoice" class="menu-title text-truncate">Ticket</span>
+        </a>
+        <ul class="menu-content">
+          <li>
+            <a routerLink="/ticket/lists" class="d-flex align-items-center"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-circle">
+                <circle cx="12" cy="12" r="10"></circle>
+              </svg><span data-i18n="List" class="menu-item text-truncate">Ticket List</span></a>
+          </li>
+          <!-- <li>
+                    <a routerLink="/ticket/edit" class="d-flex align-items-center"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-circle"><circle cx="12" cy="12" r="10"></circle></svg><span data-i18n="List" class="menu-item text-truncate">Ticket Edit</span></a>
+                  </li>
+                  <li>
+                    <a routerLink="/ticket/detail" class="d-flex align-items-center"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-circle"><circle cx="12" cy="12" r="10"></circle></svg><span data-i18n="List" class="menu-item text-truncate">Ticket Detail</span></a>
+                  </li> -->
+        </ul>
+      </li>
+      <li class="nav-item has-sub" [class.open]="isDocumentOpen" (click)="toggleDocument()">
+        <a class="d-flex align-items-center" routerLink="/document/lists">
+          <span data-i18n="Invoice" class="menu-title text-truncate">Document</span>
+        </a>
+        <ul class="menu-content">
+          <li>
+            <a routerLink="/document/lists" class="d-flex align-items-center"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-circle">
+                <circle cx="12" cy="12" r="10"></circle>
+              </svg><span data-i18n="List" class="menu-item text-truncate">Document List</span></a>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+</div>

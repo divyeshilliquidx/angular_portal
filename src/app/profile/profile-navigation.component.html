@@ -1,0 +1,42 @@
+<!-- C:\xampp8.2\htdocs\vt_portal_angular\src\app\profile\profile-navigation.component.html -->
+<ul class="nav nav-pills mb-2">
+    <!-- account -->
+    <li class="nav-item">
+        <a class="nav-link" [ngClass]="{'active': link === '/profile/account'}"  routerLink="/profile/account">
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-user font-medium-3 me-50">
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                <circle cx="12" cy="7" r="4"></circle>
+            </svg>
+            <span class="fw-bold">Account</span>
+        </a>
+    </li>
+    <!-- security -->
+    <li class="nav-item">
+        <a class="nav-link"  [ngClass]="{'active': link === '/profile/changepassword'}" routerLink="/profile/changepassword">
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-lock font-medium-3 me-50">
+                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+            </svg>
+            <span class="fw-bold">Change Password</span>
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link"  [ngClass]="{'active': link === '/profile/notification'}" routerLink="/profile/notification">
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-bell font-medium-3 me-50">
+                <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+                <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+            </svg>
+            <span class="fw-bold">Notifications</span>
+        </a>
+    </li>
+    <!-- connection -->
+    <li class="nav-item">
+        <a class="nav-link"  [ngClass]="{'active': link === '/profile/connections'}" routerLink="/profile/connections">
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-link font-medium-3 me-50">
+                <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
+                <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+            </svg>
+            <span class="fw-bold">Connections</span>
+        </a>
+    </li>
+</ul>
