@@ -47,7 +47,7 @@ export class LoginComponent {
 
       this.httpService.post(requestURL, payload).subscribe({
         next: (response: any) => {
-          const user_password = 'Admin@123';
+          const user_password = this.password;
           localStorage.setItem('user_name', response.result.user_name);
           localStorage.setItem('user_password', user_password);
           localStorage.setItem('user_id', response.result.id);

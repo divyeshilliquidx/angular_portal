@@ -6,6 +6,7 @@ import { ToastrService } from 'ngx-toastr';
 import { MdbModalRef, MdbModalService } from 'mdb-angular-ui-kit/modal';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { ModalComponent } from '../modal/modal.component';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-profile',
@@ -23,6 +24,7 @@ export class ProfileComponent implements OnInit {
     private toastr: ToastrService,
     private modalService: MdbModalService,
     private http: HttpClient,
+    private location: Location
   ) { }
 
   ngOnInit() {
@@ -53,6 +55,10 @@ export class ProfileComponent implements OnInit {
         }
       }
     });
+  }
+
+  onCancel(): void {
+    this.location.back();
   }
 }
 

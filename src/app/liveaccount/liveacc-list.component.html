@@ -1,0 +1,100 @@
+<div class="app-content content">
+    <div class="content-overlay"></div>
+    <div class="header-navbar-shadow"></div>
+    <div class="content-wrapper container-xxl p-0">
+        <div class="content-header row"></div>
+        <div class="content-body">
+            <section class="invoice-list-wrapper">
+                <div class="card">
+                    <div class="card-datatable table-responsive">
+                        <div id="DataTables_Table_0_wrapper" class="dataTables_wrapper dt-bootstrap5 no-footer">
+                            <div class="row d-flex justify-content-between align-items-center m-1">
+                                <div class="col-lg-6 d-flex align-items-center">
+                                    <div id="DataTables_Table_0_length" class="dataTables_length">
+                                        <label>
+                                            Show
+                                            <select [(ngModel)]="perPageRecord" (change)="onPerPageChange()" name="DataTables_Table_0_length" aria-controls="DataTables_Table_0" class="form-select">
+                                                <option value="10" ng-reflect-value="10">10</option>
+                                                <option value="25" ng-reflect-value="25">25</option>
+                                                <option value="50" ng-reflect-value="50">50</option>
+                                                <option value="100" ng-reflect-value="100">100</option>
+                                            </select>
+                                        </label>
+                                    </div>
+                                    <div class="dt-action-buttons text-xl-end text-lg-start text-lg-end text-start">
+                                        <div class="dt-buttons">
+                                            <!-- <button (click)="openModal()" tabindex="0" aria-controls="DataTables_Table_0" type="button" class="dt-button btn btn-primary btn-add-record ms-2"><span>Add Record</span></button> -->
+
+                                            <a [routerLink]="'/' + componentname + '/edit/-1/'"><button tabindex="0" aria-controls="DataTables_Table_0" type="button" class="dt-button btn btn-primary btn-add-record ms-2"><span>Add Record</span></button></a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 d-flex align-items-center justify-content-lg-end flex-lg-nowrap flex-wrap pe-lg-1 p-0">
+                                    <div id="DataTables_Table_0_filter" class="dataTables_filter"><label>Search<input type="search" placeholder="Search Invoice" aria-controls="DataTables_Table_0" class="form-control"></label></div>
+                                </div>
+                            </div>
+                            <table *ngIf="records" id="DataTables_Table_0" role="grid" aria-describedby="DataTables_Table_0_info" class="invoice-list-table table dataTable no-footer dtr-column">
+                                <thead>
+                                    <tr role="row">
+                                        <th tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label=": activate to sort column ascending" class="control sorting" style="display: none;"></th>
+                                        <th>Subject</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="odd" *ngFor="let value of records">
+                                        <td tabindex="0" class="control" style="display: none;"></td>
+                                        <td>{{ value.subject }}</td>
+                                        <td>
+                                            <div class="d-flex align-items-center col-actions">
+                                                <a [routerLink]="'/' + componentname + '/detail/' + value.liveaccountid">
+                                                    <i class="fas fa-info-circle">Detail</i>
+                                                </a>
+                                                &nbsp;&nbsp;
+                                                <a [routerLink]="'/' + componentname + '/edit/' + value.liveaccountid">
+                                                    <i class="fas fa-edit">Edit</i>
+                                                </a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <div class="d-flex justify-content-between mx-2 row" style="margin-bottom: 20px;">
+                                <div class="col-sm-12 col-md-6">
+                                    <div id="DataTables_Table_0_info" role="status" aria-live="polite" class="dataTables_info">
+                                        Showing {{ (currentPage - 1) * 20 }} to {{ ((currentPage * 20) > totalRecords) ? totalRecords : (currentPage * 20) }} of {{ totalRecords }} entries
+                                    </div>
+                                </div>
+                                <div class="col-sm-12 col-md-6">
+                                    <div id="DataTables_Table_0_paginate" class="dataTables_paginate paging_simple_numbers">
+                                        <!-- <ul class="pagination">
+                                <li class="page-item" [class.disabled]="currentPage === 1">
+                                  <a class="page-link" (click)="onPageChange(currentPage - 1)" aria-label="Previous">
+                                    <span aria-hidden="true">&laquo;</span>
+                                  </a>
+                                </li>
+                                <li class="page-item" *ngFor="let page of totalPagesArray" [class.active]="currentPage === page">
+                                  <a class="page-link" (click)="onPageChange(page)">{{ page }}</a>
+                                </li>
+                                <li class="page-item" [class.disabled]="currentPage === totalPages">
+                                  <a class="page-link" (click)="onPageChange(currentPage + 1)" aria-label="Next">
+                                    <span aria-hidden="true">&raquo;</span>
+                                  </a>
+                                </li>
+                              </ul> -->
+                                        <div id="DataTables_Table_0_length" class="dataTables_length">
+                                            <label> Page No </label>
+                                            <select name="DataTables_Table_0_length" aria-controls="DataTables_Table_0" class="form-select" [(ngModel)]="currentPage" (change)="onPageChange()">
+                                                <option *ngFor="let page of totalPagesArray" [value]="page">{{ page }}</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+</div>

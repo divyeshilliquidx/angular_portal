@@ -26,10 +26,8 @@
 
                       <!-- <button (click)="openModal()" tabindex="0" aria-controls="DataTables_Table_0" type="button" class="dt-button btn btn-primary btn-add-record ms-2"><span>Add Record</span></button> -->
 
-                      <a routerLink="/ticket/edit/-1"><button tabindex="0" aria-controls="DataTables_Table_0" type="button" class="dt-button btn btn-primary btn-add-record ms-2"><span>Add Record</span></button></a>
-
+                      <a [routerLink]="'/' + componentname + '/edit/-1/'"><button tabindex="0" aria-controls="DataTables_Table_0" type="button" class="dt-button btn btn-primary btn-add-record ms-2"><span>Add Record</span></button></a>
                     </div>
-
                   </div>
                 </div>
                 <div class="col-lg-6 d-flex align-items-center justify-content-lg-end flex-lg-nowrap flex-wrap pe-lg-1 p-0">
@@ -56,11 +54,11 @@
 
                     <td>
                       <div class="d-flex align-items-center col-actions">
-                        <a [routerLink]="'/ticket/detail/' + ticket.ticketid">
+                        <a [routerLink]="'/' + componentname + '/detail/' + ticket.ticketid">
                           <i class="fas fa-info-circle">Detail</i>
                         </a>
                         &nbsp;&nbsp;
-                        <a [routerLink]="'/ticket/edit/' + ticket.ticketid">
+                        <a [routerLink]="'/' + componentname + '/edit/' + ticket.ticketid">
                           <i class="fas fa-edit">Edit</i>
                         </a>
                       </div>

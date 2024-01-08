@@ -1,3 +1,14 @@
+// import { Component } from '@angular/core';
+
+// @Component({
+//   selector: 'app-liveacc-edit',
+//   templateUrl: './liveacc-edit.component.html',
+//   styleUrls: ['./liveacc-edit.component.css']
+// })
+// export class LiveaccEditComponent {
+
+// }
+
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpService } from '../services/http.service';
@@ -11,28 +22,28 @@ import { Location } from '@angular/common';
 
 
 @Component({
-  selector: 'app-ticket-edit',
-  templateUrl: './ticket-edit.component.html',
-  styleUrls: ['./ticket-edit.component.css'],
+  selector: 'app-liveacc-edit',
+  templateUrl: './liveacc-edit.component.html',
+  styleUrls: ['../../../node_modules/ngx-toastr/toastr.css', './liveacc-edit.component.css'],
   encapsulation: ViewEncapsulation.None,
 })
 
-export class TicketEditComponent implements OnInit {
+export class LiveaccEditComponent implements OnInit {
   user_id: string = '';
   user_name: string = '';
   user_password: string = '';
 
-  ticket_title: string = '';
-  ticketstatus: string = '';
-  ticketpriorities: string = '';
-  ticketseverities: string = '';
+  subject: string = '';
+  // ticketstatus: string = '';
+  // ticketpriorities: string = '';
+  // ticketseverities: string = '';
   recordId: number = 0;
   recordData: any = null;
 
-  ticket_titleValid: boolean = true;
-  ticketstatusValid: boolean = true;
-  ticketprioritiesValid: boolean = true;
-  ticketseveritiesValid: boolean = true;
+  subjectValid: boolean = true;
+  // ticketstatusValid: boolean = true;
+  // ticketprioritiesValid: boolean = true;
+  // ticketseveritiesValid: boolean = true;
 
   // searchSubject = new Subject<string>();
   // products: any[] = [];
@@ -50,7 +61,9 @@ export class TicketEditComponent implements OnInit {
     private route: ActivatedRoute,  // Inject ActivatedRoute
     private location: Location
 
-  ) { }
+  ) {
+    this.toastr.toastrConfig.positionClass = 'toast-top-right'; // Adjust position as needed
+  }
 
   ngOnInit() {
     this.user_id = localStorage.getItem('user_id') ?? '';
@@ -63,7 +76,6 @@ export class TicketEditComponent implements OnInit {
       }
 
     }
-
 
     const requestURL = 'http://localhost:3000/fetchCRMRecordByQuery';
     const payload = {
@@ -84,8 +96,7 @@ export class TicketEditComponent implements OnInit {
           startWith(''),
           map((value: string) => this._filter(value))
         );
-      },
-      error: (errorRes: any) => {
+      }, error: (errorRes: any) => {
         if (errorRes.status === 0) {
           const errorMessage = errorRes.message;
           this.toastr.error(errorMessage);
@@ -113,7 +124,7 @@ export class TicketEditComponent implements OnInit {
     const requestURL = 'http://localhost:3000/fetchReferenceRecords';
 
     const payload = {
-      module: 'HelpDesk',
+      module: 'LiveAccount',
       page: 1,
       search_params: [[]],
       crmid: recordId,
@@ -125,10 +136,10 @@ export class TicketEditComponent implements OnInit {
       next: (response: any) => {
         if (response.result.length > 0) {
           this.recordData = response;
-          this.ticket_title = response.result[0].title;
-          this.ticketstatus = response.result[0].status;
-          this.ticketpriorities = response.result[0].priority;
-          this.ticketseverities = response.result[0].severity;
+          this.subject = response.result[0].subject;
+          // this.ticketstatus = response.result[0].status;
+          // this.ticketpriorities = response.result[0].priority;
+          // this.ticketseverities = response.result[0].severity;
         }
       },
       error: (data: any) => { }
@@ -138,26 +149,26 @@ export class TicketEditComponent implements OnInit {
 
 
   saveRecordData(): void {
-    if (!this.ticket_title) {
-      this.ticket_titleValid = false;
+    if (!this.subject) {
+      this.subjectValid = false;
     } else {
-      this.ticket_titleValid = true;
+      this.subjectValid = true;
     }
 
-    if (!this.ticketstatus) {
-      this.ticketstatusValid = false;
-    } else {
-      this.ticketstatusValid = true;
-    }
+    // if (!this.ticketstatus) {
+    //   this.ticketstatusValid = false;
+    // } else {
+    //   this.ticketstatusValid = true;
+    // }
 
-    if (!this.ticketpriorities) {
-      this.ticketprioritiesValid = false;
-    } else {
-      this.ticketprioritiesValid = true;
-    }
+    // if (!this.ticketpriorities) {
+    //   this.ticketprioritiesValid = false;
+    // } else {
+    //   this.ticketprioritiesValid = true;
+    // }
 
 
-    if (this.ticket_titleValid && this.ticketstatusValid && this.ticketprioritiesValid) {
+    if (this.subjectValid) {
       this.user_id = localStorage.getItem('user_id') ?? '';
       this.user_name = localStorage.getItem('user_name') ?? '';
       this.user_password = localStorage.getItem('user_password') ?? '';
@@ -168,8 +179,8 @@ export class TicketEditComponent implements OnInit {
       });
 
       const payload: { [key: string]: string | number } = {
-        module: 'HelpDesk',
-        values: `{"ticket_title": "${this.ticket_title}", "ticketstatus": "${this.ticketstatus}", "ticketpriorities": "${this.ticketpriorities}","ticketseverities": "${this.ticketseverities}"}`,
+        module: 'LiveAccount',
+        values: `{"subject": "${this.subject}"}`,
         username: this.user_name,
         password: this.user_password
       };
@@ -178,31 +189,63 @@ export class TicketEditComponent implements OnInit {
       const recordId = this.route.snapshot.params['id'];
 
       // Check if recordId exists before adding it to the payload
-      if (recordId) {
-        payload['recordId'] = '17x' + recordId;  // Convert to number if needed
+      if (recordId > 0) {
+        payload['recordId'] = '36x' + recordId;  // Convert to number if needed
       }
+
+      // this.http.post(requestURL, payload, { headers }).subscribe({
+      //   next: (response: any) => {
+      //     if (response.success) {
+      //       if (response.result.record.id) {
+      //         this.toastr.success('LiveAccount saved successfully');
+      //         this.router.navigate(['/liveaccount/lists']);
+      //       }
+      //     } else {
+      //       this.toastr.error('Save Failed');
+      //     }
+      //   }, error: (errorRes) => {
+      //     if (errorRes.status === 0) {
+      //       const errorMessage = errorRes.message;
+      //       this.toastr.error(errorMessage);
+      //     } else {
+      //       // Handle other HTTP errors
+      //       const errorMessage = errorRes.error.message;
+      //       this.toastr.error(errorMessage);
+      //     }
+      //   }
+      // });
 
       this.http.post(requestURL, payload, { headers }).subscribe({
         next: (response: any) => {
-          if (response.success) {
+          try {
             if (response.result.record.id) {
-              this.toastr.success('Ticket saved successfully');
-              this.router.navigate(['/ticket/lists']);
+              this.toastr.success('LiveAccount saved successfully');
+              this.router.navigate(['/liveaccount/lists']);
             }
-          } else {
-            this.toastr.error('Save Failed');
+          } catch (error) {
+            this.handleErrorResponse(error);
           }
-        }, error: (errorRes) => {
-          if (errorRes.status === 0) {
-            const errorMessage = errorRes.message;
-            this.toastr.error(errorMessage);
-          } else {
-            // Handle other HTTP errors
-            const errorMessage = errorRes.error.message;
-            this.toastr.error(errorMessage);
-          }
-        }
+        },
+        error: (errorRes) => {
+          this.handleErrorResponse(errorRes);
+        },
       });
+    }
+  }
+
+  private handleErrorResponse(errorResponse: any): void {
+    try {
+      if (errorResponse.status === 0) {
+        const errorMessage = errorResponse.message;
+        this.toastr.error(errorMessage);
+      } else {
+        // Handle other HTTP errors
+        const errorMessage = errorResponse.error.message;
+        this.toastr.error(errorMessage);
+      }
+    } catch (error) {
+      console.error('Error handling failed:', error);
+      this.toastr.error('An unexpected error occurred.');
     }
   }
 

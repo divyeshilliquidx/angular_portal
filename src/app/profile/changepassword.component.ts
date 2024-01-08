@@ -21,6 +21,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
+import { Location } from '@angular/common';
 // "src/styles.css",
 //    "node_modules/ngx-toastr/toastr.css"
 
@@ -43,13 +44,9 @@ export class ChangepasswordComponent {
     private http: HttpClient,
     private toastr: ToastrService,
     private router: Router,
-
+    private location: Location
   ) {
     this.toastr.toastrConfig.positionClass = 'toast-top-right'; // Adjust position as needed
-  }
-
-  onCancel(): void {
-    this.router.navigate(['/profile/account']);
   }
 
   onSubmit() {
@@ -85,6 +82,7 @@ export class ChangepasswordComponent {
 
   changePassword(new_password: String) {
     this.user_id = localStorage.getItem('user_id') ?? '';
+
     const requestURL = 'http://localhost:3000/changePassword';
 
     const payload = {
@@ -95,9 +93,21 @@ export class ChangepasswordComponent {
     this.http.post(requestURL, payload).subscribe({
       next: (response: any) => {
         this.toastr.success("Password changed successfully");
-      },
-      error: (data: any) => { }
+      }, error: (errorRes: any) => {
+        if (errorRes.status === 0) {
+          const errorMessage = errorRes.message;
+          this.toastr.error(errorMessage);
+        } else {
+          // Handle other HTTP errors
+          const errorMessage = errorRes.error.message;
+          this.toastr.error(errorMessage);
+        }
+      }
     });
+  }
+
+  onCancel(): void {
+    this.location.back();
   }
 }
 

@@ -26,6 +26,10 @@ import { ChangepasswordComponent } from './profile/changepassword.component';
 import { NotificationComponent } from './profile/notification.component';
 import { ConnectionsComponent } from './profile/connections.component';
 import { ProfileNavigationComponent } from './profile/profile-navigation.component';
+import { LiveaccountComponent } from './liveaccount/liveaccount.component';
+import { LiveaccListComponent } from './liveaccount/liveacc-list.component';
+import { LiveaccEditComponent } from './liveaccount/liveacc-edit.component';
+import { LiveaccDetailComponent } from './liveaccount/liveacc-detail.component';
 // import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
@@ -45,7 +49,10 @@ import { ProfileNavigationComponent } from './profile/profile-navigation.compone
     NotificationComponent,
     ConnectionsComponent,
     ProfileNavigationComponent,
-
+    LiveaccountComponent,
+    LiveaccListComponent,
+    LiveaccEditComponent,
+    LiveaccDetailComponent,
   ],
   imports: [
     BrowserModule,

@@ -51,6 +51,9 @@ import { ProfileComponent } from './profile/profile.component';
 import { ChangepasswordComponent } from './profile/changepassword.component';
 import { NotificationComponent } from './profile/notification.component';
 import { ConnectionsComponent } from './profile/connections.component';
+import { LiveaccListComponent } from './liveaccount/liveacc-list.component';
+import { LiveaccEditComponent } from './liveaccount/liveacc-edit.component';
+import { LiveaccDetailComponent } from './liveaccount/liveacc-detail.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -59,9 +62,12 @@ const routes: Routes = [
     component: DashboardComponent,
     children: [
       // { path: 'ticketlist', component: TicketListComponent },
-      { path: 'ticket/lists', component: TicketListComponent }, // Add this line
+      { path: 'ticket/lists', component: TicketListComponent },
       { path: 'ticket/edit/:id', component: TicketEditComponent },
       { path: 'ticket/detail/:id', component: TicketDetailComponent },
+      { path: 'liveaccount/lists', component: LiveaccListComponent },
+      { path: 'liveaccount/edit/:id', component: LiveaccEditComponent },
+      { path: 'liveaccount/detail/:id', component: LiveaccDetailComponent },
       { path: 'profile/account', component: ProfileComponent },
       { path: 'profile/changepassword', component: ChangepasswordComponent },
       { path: 'profile/notification', component: NotificationComponent },
