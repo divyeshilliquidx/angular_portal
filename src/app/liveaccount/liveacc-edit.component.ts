@@ -60,7 +60,6 @@ export class LiveaccEditComponent implements OnInit {
     private http: HttpClient,
     private route: ActivatedRoute,  // Inject ActivatedRoute
     private location: Location
-
   ) {
     this.toastr.toastrConfig.positionClass = 'toast-top-right'; // Adjust position as needed
   }
@@ -77,36 +76,36 @@ export class LiveaccEditComponent implements OnInit {
 
     }
 
-    const requestURL = 'http://localhost:3000/fetchCRMRecordByQuery';
-    const payload = {
-      "module": "Reports",
-      "query": ["SELECT vtiger_products.* FROM vtiger_products  INNER JOIN vtiger_crmentity ON vtiger_products.productid = vtiger_crmentity.crmid  WHERE vtiger_crmentity.deleted=0 AND vtiger_products.productid > 0 ORDER BY vtiger_crmentity.modifiedtime DESC"]
-    };
+    // const requestURL = 'http://localhost:3000/fetchCRMRecordByQuery';
+    // const payload = {
+    //   "module": "Reports",
+    //   "query": ["SELECT vtiger_products.* FROM vtiger_products  INNER JOIN vtiger_crmentity ON vtiger_products.productid = vtiger_crmentity.crmid  WHERE vtiger_crmentity.deleted=0 AND vtiger_products.productid > 0 ORDER BY vtiger_crmentity.modifiedtime DESC"]
+    // };
 
-    this.httpService.post(requestURL, payload).subscribe({
-      next: (response: any) => {
-        this.products = response.data;
+    // this.httpService.post(requestURL, payload).subscribe({
+    //   next: (response: any) => {
+    //     this.products = response.data;
 
-        // this.filteredProducts$ = this.searchSubject.pipe(
-        //   startWith(''),
-        //   map(value => this._filter(value))
-        // );
+    //     // this.filteredProducts$ = this.searchSubject.pipe(
+    //     //   startWith(''),
+    //     //   map(value => this._filter(value))
+    //     // );
 
-        this.filteredProducts$ = this.searchSubject.pipe(
-          startWith(''),
-          map((value: string) => this._filter(value))
-        );
-      }, error: (errorRes: any) => {
-        if (errorRes.status === 0) {
-          const errorMessage = errorRes.message;
-          this.toastr.error(errorMessage);
-        } else {
-          // Handle other HTTP errors
-          const errorMessage = errorRes.error.message;
-          this.toastr.error(errorMessage);
-        }
-      }
-    });
+    //     this.filteredProducts$ = this.searchSubject.pipe(
+    //       startWith(''),
+    //       map((value: string) => this._filter(value))
+    //     );
+    //   }, error: (errorRes: any) => {
+    //     if (errorRes.status === 0) {
+    //       const errorMessage = errorRes.message;
+    //       this.toastr.error(errorMessage);
+    //     } else {
+    //       // Handle other HTTP errors
+    //       const errorMessage = errorRes.error.message;
+    //       this.toastr.error(errorMessage);
+    //     }
+    //   }
+    // });
 
   }
 
@@ -180,7 +179,7 @@ export class LiveaccEditComponent implements OnInit {
 
       const payload: { [key: string]: string | number } = {
         module: 'LiveAccount',
-        values: `{"subject": "${this.subject}"}`,
+        values: `{"subject": "${this.subject}","contact_id":"12x${this.user_id}"}`,
         username: this.user_name,
         password: this.user_password
       };

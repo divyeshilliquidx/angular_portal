@@ -31,7 +31,8 @@
                   </div>
                 </div>
                 <div class="col-lg-6 d-flex align-items-center justify-content-lg-end flex-lg-nowrap flex-wrap pe-lg-1 p-0">
-                  <div id="DataTables_Table_0_filter" class="dataTables_filter"><label>Search<input type="search" placeholder="Search Invoice" aria-controls="DataTables_Table_0" class="form-control"></label></div>
+                  <div id="DataTables_Table_0_filter" class="dataTables_filter"><label>Search<input type="text" name="search_ticket_name" id="search_ticket_name" placeholder="Search Ticket" aria-controls="DataTables_Table_0" class="form-control"></label></div>  
+                  <!-- [(ngModel)]="search_ticket_name" -->
                 </div>
               </div>
               <table *ngIf="ticketData" id="DataTables_Table_0" role="grid" aria-describedby="DataTables_Table_0_info" class="invoice-list-table table dataTable no-footer dtr-column">

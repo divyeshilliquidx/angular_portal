@@ -102,7 +102,7 @@ export class TicketListComponent implements OnInit {
     const loginPayload = {
       module: 'HelpDesk',
       page: page,
-      search_params: [[]],
+      search_params: [[]], //["title", 'c', 'ticket data']
       crmid: 0,
       per_page: perPage,
       contactid: this.user_id,
