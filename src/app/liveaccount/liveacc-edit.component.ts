@@ -19,7 +19,9 @@ import { FormControl } from '@angular/forms';
 import { Observable, Subject } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { Location } from '@angular/common';
+import { MdbModalRef, MdbModalService } from 'mdb-angular-ui-kit/modal';
 
+import { LeadListModalComponent } from '../liveaccount/lead-list-modal.component';
 
 @Component({
   selector: 'app-liveacc-edit',
@@ -52,16 +54,23 @@ export class LiveaccEditComponent implements OnInit {
   searchSubject = new Subject<string>();  // Use Subject<string>
   products: any[] = [];
   filteredProducts$: Observable<any[]> | undefined;
-
+  modalRef: MdbModalRef<LeadListModalComponent> | null = null;
   constructor(
     private router: Router,
     private httpService: HttpService,
     private toastr: ToastrService,
     private http: HttpClient,
     private route: ActivatedRoute,  // Inject ActivatedRoute
-    private location: Location
+    private location: Location,
+    private modalService: MdbModalService
   ) {
     this.toastr.toastrConfig.positionClass = 'toast-top-right'; // Adjust position as needed
+  }
+
+  openModal() {
+    this.modalRef = this.modalService.open(LeadListModalComponent, {
+      modalClass: 'modal-lg'
+    })
   }
 
   ngOnInit() {
@@ -225,7 +234,7 @@ export class LiveaccEditComponent implements OnInit {
             this.handleErrorResponse(error);
           }
         },
-        error: (errorRes) => {
+        error: (errorRes: any) => {
           this.handleErrorResponse(errorRes);
         },
       });
