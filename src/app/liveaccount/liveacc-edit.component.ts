@@ -69,7 +69,7 @@ export class LiveaccEditComponent implements OnInit {
 
   openModal() {
     this.modalRef = this.modalService.open(LeadListModalComponent, {
-      modalClass: 'modal-lg'
+     // modalClass: 'modal-lg'
     })
   }
 

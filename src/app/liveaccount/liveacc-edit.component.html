@@ -1,3 +1,4 @@
+<!-- liveacc-edit.component.html -->
 <div class="app-content content ">
     <div class="content-overlay"></div>
     <div class="header-navbar-shadow"></div>
@@ -40,9 +41,9 @@
                                             <span class="error" *ngIf="!subject && !subjectValid">This field is required.</span>
                                         </div>
                                         <div class="mb-1 col-md-6">
-                                            <label for="leadid" class="form-label">Lead Name&nbsp;<span style="color: red;">*</span></label>
+                                            <label for="leadid" class="form-label">Lead List&nbsp;<span style="color: red;">*</span></label>
                                             <input name="leadid" type="hidden" value="" data-displayvalue="" class="sourceField">
-                                            <input id="leadid_display" name="leadid_display" data-fieldname="leadid" data-fieldtype="reference" type="text" value="" placeholder="Type to search" autocomplete="off" class="form-control" style="width: 90%;float: left;">
+                                            <input id="leadid_display" name="leadid_display" data-fieldname="leadid" data-fieldtype="reference" type="text" value="" placeholder="Type to search" autocomplete="off" class="form-control" style="width: 96%;float: left;">
                                             <span title="Select" class="input-group-addon relatedPopup cursorPointer" style="float: left;width: 4%;padding-top: 7px;padding-left: 3px;" (click)="openModal()">
                                                 <div class="icon-wrapper">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search">
@@ -52,42 +53,7 @@
                                                 </div>
                                             </span>
                                         </div>
-                                        <!-- <div class="mb-1 col-md-6">
-                                            <label class="form-label">Status&nbsp;<span style="color:red">*</span></label>
-                                            <select class="form-select" name="ticketstatus" id="ticketstatus" [(ngModel)]="ticketstatus" [ngClass]="{ 'error': !ticketstatus &&  !ticketstatusValid }">
-                                                <option value="">Select an Option</option>
-                                                <option value="Open" [selected]="ticketstatus === 'Open' ? true : false">Open</option>
-                                                <option value="In Progress" [selected]="ticketstatus === 'In Progress' ? true : false">In Progress</option>
-                                                <option value="Wait For Response" [selected]="ticketstatus === 'Wait For Response' ? true : false">Wait For Response</option>
-                                                <option value="Closed" [selected]="ticketstatus === 'Closed' ? true : false">Closed</option>
-                                            </select>
-                                            <span class="error" *ngIf="!ticketstatus && !ticketstatusValid">This field is required.</span>
-                                        </div> -->
                                     </div>
-
-                                    <!-- <div class="row">
-                                        <div class="mb-1 col-md-6">
-                                            <label class="form-label">Priority&nbsp;<span style="color:red">*</span></label>
-                                            <select class="form-select" name="ticketpriorities" id="ticketpriorities" [(ngModel)]="ticketpriorities" [ngClass]="{ 'error': !ticketpriorities &&  !ticketprioritiesValid }">
-                                                <option value="">Select an Option</option>
-                                                <option value="Low" [selected]="ticketpriorities === 'Low' ? true : false">Low</option>
-                                                <option value="Normal" [selected]="ticketpriorities === 'Normal' ? true : false">Normal</option>
-                                                <option value="High" [selected]="ticketpriorities === 'High' ? true : false">High</option>
-                                                <option value="Urgent" [selected]="ticketpriorities === 'Urgent' ? true : false">Urgent</option>
-                                            </select>
-                                            <span class="error" *ngIf="!ticketpriorities && !ticketprioritiesValid">This field is required.</span>
-                                        </div>
-                                        <div class="mb-1 col-md-6">
-                                            <label class="form-label">Severity</label>
-                                            <select class="form-select" name="ticketseverities" id="ticketseverities" [(ngModel)]="ticketseverities">
-                                                <option value="">Select an Option</option>
-                                                <option value="Minor" [selected]="ticketseverities === 'Minor' ? true : false">Minor</option>
-                                                <option value="Major" [selected]="ticketseverities === 'Major' ? true : false">Major</option>
-                                                <option value="Feature" [selected]="ticketseverities === 'Feature' ? true : false">Feature</option>
-                                                <option value="Critical" [selected]="ticketseverities === 'Critical' ? true : false">Critical</option>
-                                            </select>
-                                        </div>
-                                    </div> -->
                                     <div class="mb-1 col-md-12 text-center">
                                         <button type="submit" class="btn btn-primary waves-effect waves-float waves-light">Save</button>&nbsp;
                                         <button type="button" class="btn btn-danger waves-effect waves-float waves-light" (click)="onCancel()">Cancel</button>

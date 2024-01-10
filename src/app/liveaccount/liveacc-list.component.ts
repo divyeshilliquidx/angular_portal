@@ -79,7 +79,7 @@ export class LiveaccListComponent implements OnInit {
         this.totalPages = response.total_pages;
         this.totalRecords = response.total_records;
         this.totalPagesArray = this.createNumberArray(response.total_pages);
-      }, error: (errorRes) => {
+      }, error: (errorRes: any) => {
         if (errorRes.status === 0) {
           const errorMessage = errorRes.message;
           this.toastr.error(errorMessage);

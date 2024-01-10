@@ -30,6 +30,8 @@ import { LiveaccountComponent } from './liveaccount/liveaccount.component';
 import { LiveaccListComponent } from './liveaccount/liveacc-list.component';
 import { LiveaccEditComponent } from './liveaccount/liveacc-edit.component';
 import { LiveaccDetailComponent } from './liveaccount/liveacc-detail.component';
+import { LeadListModalComponent } from './liveaccount/lead-list-modal.component';
+import { CommonModule } from '@angular/common';
 // import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
@@ -53,6 +55,7 @@ import { LiveaccDetailComponent } from './liveaccount/liveacc-detail.component';
     LiveaccListComponent,
     LiveaccEditComponent,
     LiveaccDetailComponent,
+    LeadListModalComponent,
   ],
   imports: [
     BrowserModule,
@@ -62,7 +65,8 @@ import { LiveaccDetailComponent } from './liveaccount/liveacc-detail.component';
     BrowserAnimationsModule, // required animations module
     ToastrModule.forRoot(), // ToastrModule added here
     NgSelectModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    CommonModule,
   ],
   providers: [MdbModalService],
   bootstrap: [AppComponent]
