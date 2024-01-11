@@ -9,7 +9,7 @@
             <div class="d-flex justify-content-between align-items-center mx-0 row">
                 <div class="col-sm-12 col-md-6">
                     <div class="dataTables_length" id="DataTables_Table_1_length">
-                        <label>Show <select name="DataTables_Table_1_length" class="form-select">
+                        <label>Show <select name="leads_per_page" id="leads_per_page" class="form-select">
                                 <option value="10">10</option>
                                 <option value="25">25</option>
                                 <option value="50">50</option>
@@ -30,7 +30,7 @@
                         <th></th>
                         <th><input type="text" class="form-control form-control-sm" id="search_firstname" name="search_firstname" placeholder="Search First Name"></th>
                         <th><input type="text" class="form-control form-control-sm" id="search_lastname" name="search_lastname" placeholder="Search Last Name"></th>
-                        <th></th>
+                        <th><button type="submit" class="btn btn-primary waves-effect waves-float waves-light" (click)="searchLead()">Search</button></th>
                     </tr>
                 </thead>
                 <tbody>
