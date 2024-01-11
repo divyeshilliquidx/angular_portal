@@ -1,14 +1,4 @@
-// import { Component } from '@angular/core';
-
-// @Component({
-//   selector: 'app-liveacc-edit',
-//   templateUrl: './liveacc-edit.component.html',
-//   styleUrls: ['./liveacc-edit.component.css']
-// })
-// export class LiveaccEditComponent {
-
-// }
-
+// C:\xampp8.2\htdocs\vt_portal_angular\src\app\liveaccount\liveacc-edit.component.ts
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpService } from '../services/http.service';
@@ -34,27 +24,21 @@ export class LiveaccEditComponent implements OnInit {
   user_id: string = '';
   user_name: string = '';
   user_password: string = '';
-
+  leadList: any[] = [];
   subject: string = '';
-  // ticketstatus: string = '';
-  // ticketpriorities: string = '';
-  // ticketseverities: string = '';
+  leadid: number = 0;
+  leadid_display: string = '';
   recordId: number = 0;
   recordData: any = null;
 
   subjectValid: boolean = true;
-  // ticketstatusValid: boolean = true;
-  // ticketprioritiesValid: boolean = true;
-  // ticketseveritiesValid: boolean = true;
-
-  // searchSubject = new Subject<string>();
-  // products: any[] = [];
-  // filteredProducts$: Observable<any[]> | undefined;
 
   searchSubject = new Subject<string>();  // Use Subject<string>
   products: any[] = [];
   filteredProducts$: Observable<any[]> | undefined;
-  modalRef: MdbModalRef<LeadListModalComponent> | null = null;
+  modalRef: MdbModalRef<LeadListModalComponent> | any = {};
+
+
   constructor(
     private router: Router,
     private httpService: HttpService,
@@ -62,16 +46,13 @@ export class LiveaccEditComponent implements OnInit {
     private http: HttpClient,
     private route: ActivatedRoute,  // Inject ActivatedRoute
     private location: Location,
-    private modalService: MdbModalService
+    private modalService: MdbModalService,
+
   ) {
     this.toastr.toastrConfig.positionClass = 'toast-top-right'; // Adjust position as needed
   }
 
-  openModal() {
-    this.modalRef = this.modalService.open(LeadListModalComponent, {
-     // modalClass: 'modal-lg'
-    })
-  }
+
 
   ngOnInit() {
     this.user_id = localStorage.getItem('user_id') ?? '';
@@ -84,48 +65,6 @@ export class LiveaccEditComponent implements OnInit {
       }
 
     }
-
-    // const requestURL = 'http://localhost:3000/fetchCRMRecordByQuery';
-    // const payload = {
-    //   "module": "Reports",
-    //   "query": ["SELECT vtiger_products.* FROM vtiger_products  INNER JOIN vtiger_crmentity ON vtiger_products.productid = vtiger_crmentity.crmid  WHERE vtiger_crmentity.deleted=0 AND vtiger_products.productid > 0 ORDER BY vtiger_crmentity.modifiedtime DESC"]
-    // };
-
-    // this.httpService.post(requestURL, payload).subscribe({
-    //   next: (response: any) => {
-    //     this.products = response.data;
-
-    //     // this.filteredProducts$ = this.searchSubject.pipe(
-    //     //   startWith(''),
-    //     //   map(value => this._filter(value))
-    //     // );
-
-    //     this.filteredProducts$ = this.searchSubject.pipe(
-    //       startWith(''),
-    //       map((value: string) => this._filter(value))
-    //     );
-    //   }, error: (errorRes: any) => {
-    //     if (errorRes.status === 0) {
-    //       const errorMessage = errorRes.message;
-    //       this.toastr.error(errorMessage);
-    //     } else {
-    //       // Handle other HTTP errors
-    //       const errorMessage = errorRes.error.message;
-    //       this.toastr.error(errorMessage);
-    //     }
-    //   }
-    // });
-
-  }
-
-  private _filter(value: string): any[] {
-    const filterValue = value.toLowerCase();
-    return this.products.filter(product => product.productname.toLowerCase().includes(filterValue));
-  }
-
-  onSelect(event: any) {
-    // Handle the selected product
-    console.log('Selected Product:', event);
   }
 
   fetchDataByRecordId(recordId: number) {
@@ -145,15 +84,43 @@ export class LiveaccEditComponent implements OnInit {
         if (response.result.length > 0) {
           this.recordData = response;
           this.subject = response.result[0].subject;
-          // this.ticketstatus = response.result[0].status;
-          // this.ticketpriorities = response.result[0].priority;
-          // this.ticketseverities = response.result[0].severity;
         }
       },
       error: (data: any) => { }
     });
   }
 
+
+  loadLeadList() {
+    //const firstname = 'Ra';
+    const apiUrl = 'http://localhost:3000/fetchCRMRecordByQuery';
+    const query = {
+      module: 'Reports',
+      query: ["SELECT leadid,lead_no,firstname,lastname FROM `vtiger_leaddetails` "]
+    };
+
+    return this.http.post<any>(apiUrl, query);
+  }
+
+  openLeadListModal() {
+    this.loadLeadList().subscribe((response: any) => {
+      if (response.success) {
+        this.modalRef = this.modalService.open(LeadListModalComponent, {
+          data: {
+            leadData: response.data
+          },
+        });
+
+        this.modalRef.onClose.subscribe((selectedData: any) => {
+          if (selectedData) {
+            // Update input fields with selected data
+            this.leadid = selectedData.leadid;
+            this.leadid_display = selectedData.firstname + ' ' + selectedData.lastname;
+          }
+        });
+      }
+    });
+  }
 
 
   saveRecordData(): void {
@@ -188,7 +155,7 @@ export class LiveaccEditComponent implements OnInit {
 
       const payload: { [key: string]: string | number } = {
         module: 'LiveAccount',
-        values: `{"subject": "${this.subject}","contact_id":"12x${this.user_id}"}`,
+        values: `{"subject": "${this.subject}","leadid": "10x${this.leadid}","contact_id":"12x${this.user_id}"}`,
         username: this.user_name,
         password: this.user_password
       };
@@ -200,28 +167,6 @@ export class LiveaccEditComponent implements OnInit {
       if (recordId > 0) {
         payload['recordId'] = '36x' + recordId;  // Convert to number if needed
       }
-
-      // this.http.post(requestURL, payload, { headers }).subscribe({
-      //   next: (response: any) => {
-      //     if (response.success) {
-      //       if (response.result.record.id) {
-      //         this.toastr.success('LiveAccount saved successfully');
-      //         this.router.navigate(['/liveaccount/lists']);
-      //       }
-      //     } else {
-      //       this.toastr.error('Save Failed');
-      //     }
-      //   }, error: (errorRes) => {
-      //     if (errorRes.status === 0) {
-      //       const errorMessage = errorRes.message;
-      //       this.toastr.error(errorMessage);
-      //     } else {
-      //       // Handle other HTTP errors
-      //       const errorMessage = errorRes.error.message;
-      //       this.toastr.error(errorMessage);
-      //     }
-      //   }
-      // });
 
       this.http.post(requestURL, payload, { headers }).subscribe({
         next: (response: any) => {

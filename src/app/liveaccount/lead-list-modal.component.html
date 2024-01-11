@@ -24,18 +24,21 @@
                         <th>Lead No</th>
                         <th>First Name</th>
                         <th>Last Name</th>
+                        <th></th>
                     </tr>
                     <tr role="row">
                         <th></th>
                         <th><input type="text" class="form-control form-control-sm" id="search_firstname" name="search_firstname" placeholder="Search First Name"></th>
                         <th><input type="text" class="form-control form-control-sm" id="search_lastname" name="search_lastname" placeholder="Search Last Name"></th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let value of leadList">
-                        <td>{{ value.lead_no }}</td>
-                        <td><a click="selectLead(value.leadid)">{{ value.firstname }}</a></td>
-                        <td>{{ value.lastname }}</td>
+                    <tr *ngFor="let item of leadData" (click)="selectedLead(item.leadid,item.firstname,item.lastname)">
+                        <td>{{ item.lead_no }}</td>
+                        <td>{{ item.firstname }}</td>
+                        <td>{{ item.lastname }}</td>
+                        <td><button type="submit" class="btn btn-primary waves-effect waves-float waves-light" (click)="selectedLead(item.leadid,item.firstname,item.lastname)">Select</button></td>
                     </tr>
                 </tbody>
             </table>
