@@ -32,6 +32,8 @@ import { LiveaccEditComponent } from './liveaccount/liveacc-edit.component';
 import { LiveaccDetailComponent } from './liveaccount/liveacc-detail.component';
 import { LeadListModalComponent } from './liveaccount/lead-list-modal.component';
 import { CommonModule } from '@angular/common';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 // import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
@@ -67,6 +69,8 @@ import { CommonModule } from '@angular/common';
     NgSelectModule,
     ReactiveFormsModule,
     CommonModule,
+    BsDatepickerModule.forRoot(),
+    BsDropdownModule.forRoot(),
   ],
   providers: [MdbModalService],
   bootstrap: [AppComponent]

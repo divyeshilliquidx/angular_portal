@@ -96,7 +96,7 @@ export class LiveaccEditComponent implements OnInit {
     const apiUrl = 'http://localhost:3000/fetchCRMRecordByQuery';
     const query = {
       module: 'Reports',
-      query: ["SELECT leadid,lead_no,firstname,lastname FROM `vtiger_leaddetails` LIMIT 10 "]
+      query: ["SELECT vtiger_leaddetails.lead_no,vtiger_leaddetails.firstname, vtiger_leaddetails.lastname, vtiger_crmentity.smownerid, vtiger_leaddetails.leadsource, vtiger_leaddetails.leadid, vtiger_crmentity_user_field.starred,vtiger_leaddetails.date_of_birth FROM vtiger_leaddetails INNER JOIN vtiger_crmentity ON vtiger_leaddetails.leadid = vtiger_crmentity.crmid LEFT JOIN vtiger_users ON vtiger_crmentity.smownerid = vtiger_users.id LEFT JOIN vtiger_groups ON vtiger_crmentity.smownerid = vtiger_groups.groupid LEFT JOIN vtiger_crmentity_user_field ON vtiger_leaddetails.leadid = vtiger_crmentity_user_field.recordid AND vtiger_crmentity_user_field.userid=1 ORDER BY vtiger_crmentity.modifiedtime DESC LIMIT 10"]
     };
 
     return this.http.post<any>(apiUrl, query);
@@ -109,7 +109,7 @@ export class LiveaccEditComponent implements OnInit {
           data: {
             leadData: response.data
           },
-          // modalClass: 'modal-dialog-scrollable'
+          modalClass: 'modal-xl'
         });
 
         this.modalRef.onClose.subscribe((selectedData: any) => {

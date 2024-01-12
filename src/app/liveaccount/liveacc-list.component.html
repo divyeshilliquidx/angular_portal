@@ -1,14 +1,16 @@
 <div class="app-content content">
     <div class="content-overlay"></div>
     <div class="header-navbar-shadow"></div>
-    <div class="content-wrapper container-xxl p-0">
+    <div class="content-wrapper p-0">
         <div class="content-header row"></div>
         <div class="content-body">
             <section class="invoice-list-wrapper">
                 <div class="card">
                     <div class="card-datatable table-responsive">
                         <div id="DataTables_Table_0_wrapper" class="dataTables_wrapper dt-bootstrap5 no-footer">
-                            <div class="row d-flex justify-content-between align-items-center m-1">
+
+
+                            <!-- <div class="row d-flex justify-content-between align-items-center m-1">
                                 <div class="col-lg-6 d-flex align-items-center">
                                     <div id="DataTables_Table_0_length" class="dataTables_length">
                                         <label>
@@ -23,17 +25,106 @@
                                     </div>
                                     <div class="dt-action-buttons text-xl-end text-lg-start text-lg-end text-start">
                                         <div class="dt-buttons">
-                                            <!-- <button (click)="openModal()" tabindex="0" aria-controls="DataTables_Table_0" type="button" class="dt-button btn btn-primary btn-add-record ms-2"><span>Add Record</span></button> -->
-
                                             <a [routerLink]="'/' + componentname + '/edit/-1/'"><button tabindex="0" aria-controls="DataTables_Table_0" type="button" class="dt-button btn btn-primary btn-add-record ms-2"><span>Add Record</span></button></a>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-lg-6 d-flex align-items-center justify-content-lg-end flex-lg-nowrap flex-wrap pe-lg-1 p-0">
-                                    <div id="DataTables_Table_0_filter" class="dataTables_filter"><label>Search<input type="search" placeholder="Search Invoice" aria-controls="DataTables_Table_0" class="form-control"></label></div>
+                            </div> -->
+
+                            <div class="row d-flex justify-content-between align-items-center m-1">
+                                <div class="col-sm-12 col-md-6 d-flex align-items-center">
+                                    <div class="dataTables_length" id="DataTables_Table_0_length">
+                                        <label>
+                                            Show
+                                            <select [(ngModel)]="perPageRecord" (change)="onPerPageChange()" name="DataTables_Table_0_length" aria-controls="DataTables_Table_0" class="form-select">
+                                                <option value="10" ng-reflect-value="10">10</option>
+                                                <option value="25" ng-reflect-value="25">25</option>
+                                                <option value="50" ng-reflect-value="50">50</option>
+                                                <option value="100" ng-reflect-value="100">100</option>
+                                            </select>entries
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12 col-md-6">
+                                    <div id="DataTables_Table_0_filter" class="dataTables_filter">
+                                        <a [routerLink]="'/' + componentname + '/edit/-1/'">
+                                            <button class="dt-button create-new btn btn-primary" tabindex="0" aria-controls="DataTables_Table_0" type="button" data-bs-toggle="modal" data-bs-target="#modals-slide-in">
+                                                <span>
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-plus me-50 font-small-4">
+                                                        <line x1="12" y1="5" x2="12" y2="19"></line>
+                                                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                                                    </svg>Add New Record</span>
+                                            </button>
+                                        </a>
+                                    </div>
                                 </div>
                             </div>
-                            <table *ngIf="records" id="DataTables_Table_0" role="grid" aria-describedby="DataTables_Table_0_info" class="invoice-list-table table dataTable no-footer dtr-column">
+
+
+                            <table class="table" *ngIf="records">
+                                <thead>
+                                    <tr role="row">
+                                        <th>Subject</th>
+                                        <th>Decimal</th>
+                                        <th>Intger</th>
+                                        <th>Percent</th>
+                                        <th>Currency</th>
+                                        <th style="width: 138px;">Date</th>
+                                        <th>Email</th>
+                                        <th>Picklist</th>
+                                        <th>Checkbox</th>
+                                        <th>Assigned To</th>
+                                        <th>#</th>
+                                    </tr>
+                                    <tr role="row">
+                                        <th><input type="text" class="form-control" placeholder="Search Subject"></th>
+                                        <th><input type="text" class="form-control" placeholder="Search Decimal"></th>
+                                        <th><input type="text" class="form-control" placeholder="Search Intger"></th>
+                                        <th><input type="text" class="form-control" placeholder="Search Percent"></th>
+                                        <th><input type="text" class="form-control" placeholder="Search Currency"></th>
+                                        <th><input type="text" class="form-control" placeholder="Search Date"></th>
+                                        <th><input type="text" class="form-control" placeholder="Search Email"></th>
+                                        <th><input type="text" class="form-control" placeholder="Search Picklist"></th>
+                                        <th><input type="text" class="form-control" placeholder="Search Checkbox"></th>
+                                        <th><input type="text" class="form-control" placeholder="Search Assigned To"></th>
+                                        <th><button type="submit" class="btn btn-primary waves-effect waves-float waves-light">Search</button></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="odd" *ngFor="let value of records">
+                                        <td>{{ value.subject }}</td>
+                                        <td>{{ value.decimal_test }}</td>
+                                        <td>{{ value.integer_test }}</td>
+                                        <td>{{ value.percentage_test }}</td>
+                                        <td>{{ value.currency_test }} </td>
+                                        <td>{{ value.date_test | date: 'yyyy-MM-dd' }} </td>
+                                        <td>{{ value.email_test }} </td>
+                                        <td>{{ value.picklist_test }} </td>
+                                        <td>{{ value.checkbox_test }} </td>
+                                        <td>{{ value.smownerid }} </td>
+                                        <td>
+                                            <div class="btn-group" dropdown>
+                                                <a class="pe-1 dropdown-toggle hide-arrow text-primary" data-bs-toggle="dropdown" aria-expanded="false" dropdownToggle><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-vertical font-small-4">
+                                                        <circle cx="12" cy="12" r="1"></circle>
+                                                        <circle cx="12" cy="5" r="1"></circle>
+                                                        <circle cx="12" cy="19" r="1"></circle>
+                                                    </svg></a>
+
+                                                <!-- <button id="button-split" type="button" dropdownToggle class="btn btn-danger dropdown-toggle dropdown-toggle-split" aria-controls="dropdown-split">
+                                                    <span class="caret"></span>
+                                                    <span class="sr-only visually-hidden">Split button!</span>
+                                                </button> -->
+                                                <ul id="dropdown-split" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-split" style="min-width: 5px;">
+                                                    <li role="menuitem"><a class="dropdown-item" [routerLink]="'/' + componentname + '/edit/' + value.liveaccountid">Edit</a></li>
+                                                    <li role="menuitem"><a class="dropdown-item" [routerLink]="'/' + componentname + '/detail/' + value.liveaccountid">Detail</a></li>
+                                                </ul>
+                                            </div>
+                                        </td>
+                                    </tr>
+
+                                </tbody>
+                            </table>
+                            <!-- <table *ngIf="records" id="DataTables_Table_0" role="grid" aria-describedby="DataTables_Table_0_info" class="invoice-list-table table dataTable no-footer dtr-column">
                                 <thead>
                                     <tr role="row">
                                         <th tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label=": activate to sort column ascending" class="control sorting" style="display: none;"></th>
@@ -58,7 +149,7 @@
                                         </td>
                                     </tr>
                                 </tbody>
-                            </table>
+                            </table> -->
                             <div class="d-flex justify-content-between mx-2 row" style="margin-bottom: 20px;">
                                 <div class="col-sm-12 col-md-6">
                                     <div id="DataTables_Table_0_info" role="status" aria-live="polite" class="dataTables_info">
