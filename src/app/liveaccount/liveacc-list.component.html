@@ -60,70 +60,95 @@
                                 </div>
                             </div>
 
+                            <div style="max-height: 550px; overflow-y: auto;">
+                                <table class="table" *ngIf="records">
+                                    <thead>
+                                        <tr role="row">
+                                            <th style="min-width: 250px;">Subject</th>
+                                            <th style="min-width: 250px;">Lead Name</th>
+                                            <th style="min-width: 250px;">Decimal</th>
+                                            <th style="min-width: 250px;">Intger</th>
+                                            <th style="min-width: 250px;">Percent</th>
+                                            <th style="min-width: 250px;">Currency</th>
+                                            <th style="min-width: 250px;">Date</th>
+                                            <th style="min-width: 250px;">Email</th>
+                                            <th style="min-width: 250px;">Picklist</th>
+                                            <th style="min-width: 250px;">Checkbox</th>
+                                            <th style="min-width: 250px;">Assigned To</th>
+                                            <th style="min-width: 50px;">#</th>
+                                        </tr>
+                                        <tr role="row">
+                                            <th><input type="text" class="form-control" [(ngModel)]="subject" placeholder="Search Subject"></th>
+                                            <th><input type="text" class="form-control" [(ngModel)]="leadId" placeholder="Search Lead"></th>
+                                            <th><input type="text" class="form-control" [(ngModel)]="decimalTest" placeholder="Search Decimal"></th>
+                                            <th><input type="text" class="form-control" [(ngModel)]="integerTest" placeholder="Search Intger"></th>
+                                            <th><input type="text" class="form-control" [(ngModel)]="percentageTest" placeholder="Search Percent"></th>
+                                            <th><input type="text" class="form-control" [(ngModel)]="currencyTest" placeholder="Search Currency"></th>
+                                            <th><input type="text" class="form-control" [(ngModel)]="dateTestStart" bsDaterangepicker [bsConfig]="{ rangeInputFormat: 'YYYY-MM-DD'}" placeholder="Search Date"></th>
+                                            <th><input type="text" class="form-control" [(ngModel)]="emailTest" placeholder="Search Email"></th>
+                                            <th>
+                                                <select class="form-select ng-untouched ng-pristine ng-valid" [(ngModel)]="picklistTest">
+                                                    <option value="">Select an Option</option>
+                                                    <option value="china">china</option>
+                                                    <option value="india">india</option>
+                                                </select>
+                                            </th>
+                                            <th>
+                                                <select class="form-select ng-untouched ng-pristine ng-valid" [(ngModel)]="checkboxTest">
+                                                    <option value="">Select an Option</option>
+                                                    <option value="1">Yes</option>
+                                                    <option value="0">No</option>
+                                                </select>
+                                                <!-- <input type="text" class="form-control" [(ngModel)]="checkboxTest" placeholder="Search Checkbox"></th> -->
+                                            <th>
+                                                <select class="form-select ng-untouched ng-pristine ng-valid" [(ngModel)]="assignedUser">
+                                                    <optgroup label="Users"></optgroup>
+                                                    <optgroup label="Groups">
+                                                        <option value="3">Marketing Group</option>
+                                                        <option value="4">Support Group</option>
+                                                        <option value="2">Team Selling</option>
+                                                    </optgroup>
+                                                </select>
+                                            </th>
+                                            <th><button type="submit" class="btn btn-primary waves-effect waves-float waves-light" (click)="searchRecordList(subject,leadId,decimalTest,integerTest,percentageTest,currencyTest,dateTestStart,emailTest,picklistTest,checkboxTest,assignedUser,perPageRecord,currentPage)">Search</button></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr class="odd" *ngFor="let value of records">
+                                            <td>{{ value.subject }}</td>
+                                            <td>{{ value.leadid_display }}</td>
+                                            <td>{{ value.decimal_test | number:'1.2-2' }}</td>
+                                            <td>{{ value.integer_test }}</td>
+                                            <td>{{ value.percentage_test | number:'1.2-2' }}</td>
+                                            <td>{{ value.currency_test | number:'1.2-2' }} </td>
+                                            <td>{{ value.date_test | date: 'yyyy-MM-dd' }} </td>
+                                            <td>{{ value.email_test }} </td>
+                                            <td>{{ value.picklist_test }} </td>
+                                            <td>{{ (value.checkbox_test === '1') ? 'YES':'NO' }} </td>
+                                            <td>{{ value.smownername }} </td>
+                                            <td>
+                                                <div class="btn-group" dropdown>
+                                                    <a class="pe-1 dropdown-toggle hide-arrow text-primary" data-bs-toggle="dropdown" aria-expanded="false" dropdownToggle><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-vertical font-small-4">
+                                                            <circle cx="12" cy="12" r="1"></circle>
+                                                            <circle cx="12" cy="5" r="1"></circle>
+                                                            <circle cx="12" cy="19" r="1"></circle>
+                                                        </svg></a>
 
-                            <table class="table" *ngIf="records">
-                                <thead>
-                                    <tr role="row">
-                                        <th>Subject</th>
-                                        <th>Decimal</th>
-                                        <th>Intger</th>
-                                        <th>Percent</th>
-                                        <th>Currency</th>
-                                        <th style="width: 138px;">Date</th>
-                                        <th>Email</th>
-                                        <th>Picklist</th>
-                                        <th>Checkbox</th>
-                                        <th>Assigned To</th>
-                                        <th>#</th>
-                                    </tr>
-                                    <tr role="row">
-                                        <th><input type="text" class="form-control" placeholder="Search Subject"></th>
-                                        <th><input type="text" class="form-control" placeholder="Search Decimal"></th>
-                                        <th><input type="text" class="form-control" placeholder="Search Intger"></th>
-                                        <th><input type="text" class="form-control" placeholder="Search Percent"></th>
-                                        <th><input type="text" class="form-control" placeholder="Search Currency"></th>
-                                        <th><input type="text" class="form-control" placeholder="Search Date"></th>
-                                        <th><input type="text" class="form-control" placeholder="Search Email"></th>
-                                        <th><input type="text" class="form-control" placeholder="Search Picklist"></th>
-                                        <th><input type="text" class="form-control" placeholder="Search Checkbox"></th>
-                                        <th><input type="text" class="form-control" placeholder="Search Assigned To"></th>
-                                        <th><button type="submit" class="btn btn-primary waves-effect waves-float waves-light">Search</button></th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr class="odd" *ngFor="let value of records">
-                                        <td>{{ value.subject }}</td>
-                                        <td>{{ value.decimal_test }}</td>
-                                        <td>{{ value.integer_test }}</td>
-                                        <td>{{ value.percentage_test }}</td>
-                                        <td>{{ value.currency_test }} </td>
-                                        <td>{{ value.date_test | date: 'yyyy-MM-dd' }} </td>
-                                        <td>{{ value.email_test }} </td>
-                                        <td>{{ value.picklist_test }} </td>
-                                        <td>{{ value.checkbox_test }} </td>
-                                        <td>{{ value.smownerid }} </td>
-                                        <td>
-                                            <div class="btn-group" dropdown>
-                                                <a class="pe-1 dropdown-toggle hide-arrow text-primary" data-bs-toggle="dropdown" aria-expanded="false" dropdownToggle><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-vertical font-small-4">
-                                                        <circle cx="12" cy="12" r="1"></circle>
-                                                        <circle cx="12" cy="5" r="1"></circle>
-                                                        <circle cx="12" cy="19" r="1"></circle>
-                                                    </svg></a>
-
-                                                <!-- <button id="button-split" type="button" dropdownToggle class="btn btn-danger dropdown-toggle dropdown-toggle-split" aria-controls="dropdown-split">
+                                                    <!-- <button id="button-split" type="button" dropdownToggle class="btn btn-danger dropdown-toggle dropdown-toggle-split" aria-controls="dropdown-split">
                                                     <span class="caret"></span>
                                                     <span class="sr-only visually-hidden">Split button!</span>
                                                 </button> -->
-                                                <ul id="dropdown-split" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-split" style="min-width: 5px;">
-                                                    <li role="menuitem"><a class="dropdown-item" [routerLink]="'/' + componentname + '/edit/' + value.liveaccountid">Edit</a></li>
-                                                    <li role="menuitem"><a class="dropdown-item" [routerLink]="'/' + componentname + '/detail/' + value.liveaccountid">Detail</a></li>
-                                                </ul>
-                                            </div>
-                                        </td>
-                                    </tr>
+                                                    <ul id="dropdown-split" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-split" style="min-width: 5px;">
+                                                        <li role="menuitem"><a class="dropdown-item" [routerLink]="'/' + componentname + '/edit/' + value.liveaccountid">Edit</a></li>
+                                                        <li role="menuitem"><a class="dropdown-item" [routerLink]="'/' + componentname + '/detail/' + value.liveaccountid">Detail</a></li>
+                                                    </ul>
+                                                </div>
+                                            </td>
+                                        </tr>
 
-                                </tbody>
-                            </table>
+                                    </tbody>
+                                </table>
+                            </div>
                             <!-- <table *ngIf="records" id="DataTables_Table_0" role="grid" aria-describedby="DataTables_Table_0_info" class="invoice-list-table table dataTable no-footer dtr-column">
                                 <thead>
                                     <tr role="row">

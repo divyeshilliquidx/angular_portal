@@ -77,6 +77,7 @@ export class LiveaccEditComponent implements OnInit {
       crmid: recordId,
       per_page: 1,
       contactid: this.user_id,
+      add_extra_columns: ",(SELECT CONCAT(vtiger_leaddetails.firstname,' ',vtiger_leaddetails.lastname) FROM vtiger_leaddetails WHERE vtiger_leaddetails.leadid = vtiger_liveaccount.leadid) leadid_display,(SELECT vtiger_account.accountname FROM vtiger_account WHERE vtiger_account.accountid = vtiger_liveaccount.accountid) accountid_display"
     };
 
     this.httpService.post(requestURL, payload).subscribe({
